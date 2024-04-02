@@ -27,8 +27,23 @@ public class ProjectController {
         return projectService.getProjectList();
     }
 
+    @GetMapping("/project/{id}")
+    public ProjectDto getProjectById(@PathVariable String id){
+        return projectService.getProjectById(id);
+    }
+
     @PostMapping("/create-project")
     public ProjectDto createProject(@RequestBody ProjectDto projectDto){
         return projectService.createProject(projectDto);
+    }
+
+    @PutMapping("/update-project/{id}")
+    public ProjectDto updateProject(@RequestBody ProjectDto projectDto, @PathVariable String id){
+        return projectService.updateProject(projectDto, id);
+    }
+
+    @DeleteMapping("/delete-project/{id}")
+    public ProjectDto deleteProject(@PathVariable String id){
+        return projectService.deleteProject(id);
     }
 }

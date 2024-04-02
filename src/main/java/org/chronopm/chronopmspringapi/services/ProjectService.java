@@ -26,8 +26,36 @@ public class ProjectService implements IProjectService {
                 .collect(Collectors.toList());
     }
 
+    public ProjectDto getProjectById(String id) {
+        var project = projectRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Project not found"));
+
+        return ProjectMapper.mapToDto(project);
+    }
+
     public ProjectDto createProject(ProjectDto dto) {
         var project = projectRepository.save(ProjectMapper.mapToModel(dto));
+        return ProjectMapper.mapToDto(project);
+    }
+
+    public ProjectDto updateProject(ProjectDto dto, String id) {
+        var existingProject = projectRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Project not found"));
+
+        var updatedProject = ProjectMapper.mapForUpdate(dto);
+        updatedProject.setId(existingProject.getId());
+
+        projectRepository.save(updatedProject);
+
+        return ProjectMapper.mapToDto(updatedProject);
+    }
+
+    public ProjectDto deleteProject(String id) {
+        var project = projectRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Project not found"));
+
+        projectRepository.deleteById(id);
+
         return ProjectMapper.mapToDto(project);
     }
 }
