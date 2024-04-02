@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/projects")
 public class ProjectController {
 
     private final IProjectService projectService;
@@ -17,33 +17,28 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
-    @GetMapping("/welcome")
-    public String getWelcome() {
-        return "Welcome here";
-    }
-
-    @GetMapping("/projects")
+    @GetMapping()
     public List<ProjectDto> getProjectList(){
         return projectService.getProjectList();
     }
 
-    @GetMapping("/project/{id}")
-    public ProjectDto getProjectById(@PathVariable String id){
+    @GetMapping("/{id}")
+    public ProjectDto getProjectById(@PathVariable("id") String id){
         return projectService.getProjectById(id);
     }
 
-    @PostMapping("/create-project")
+    @PostMapping("/create")
     public ProjectDto createProject(@RequestBody ProjectDto projectDto){
         return projectService.createProject(projectDto);
     }
 
-    @PutMapping("/update-project/{id}")
-    public ProjectDto updateProject(@RequestBody ProjectDto projectDto, @PathVariable String id){
+    @PutMapping("/update/{id}")
+    public ProjectDto updateProject(@RequestBody ProjectDto projectDto, @PathVariable("id") String id){
         return projectService.updateProject(projectDto, id);
     }
 
-    @DeleteMapping("/delete-project/{id}")
-    public ProjectDto deleteProject(@PathVariable String id){
+    @DeleteMapping("/delete/{id}")
+    public ProjectDto deleteProject(@PathVariable("id") String id){
         return projectService.deleteProject(id);
     }
 }
