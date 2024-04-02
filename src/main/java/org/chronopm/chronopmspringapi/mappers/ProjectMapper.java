@@ -1,12 +1,9 @@
 package org.chronopm.chronopmspringapi.mappers;
 
-import org.chronopm.chronopmspringapi.dtos.projectDto.ProjectDto;
-import org.chronopm.chronopmspringapi.dtos.projectDto.UpdateProjectDto;
+import org.chronopm.chronopmspringapi.dtos.ProjectDto;
 import org.chronopm.chronopmspringapi.models.Project;
 
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.stream.Collectors;
 
 public class ProjectMapper {
     public static ProjectDto mapToDto(Project project){
@@ -27,12 +24,6 @@ public class ProjectMapper {
                 .build();
     }
 
-    public static Collection<ProjectDto> mapListToDto(Collection<Project> projectList){
-        return projectList.stream()
-                .map(ProjectMapper::mapToDto)
-                .collect(Collectors.toList());
-    }
-
     public static Project mapToModel (ProjectDto dto){
         return Project.builder()
                 .projectName(dto.getProjectName())
@@ -50,7 +41,7 @@ public class ProjectMapper {
                 .build();
     }
 
-    public static Project updateModelFromDto(UpdateProjectDto updateProjectDto){
+    public static Project mapForUpdate(ProjectDto updateProjectDto){
         return Project.builder()
                 .updatedAt(LocalDateTime.now())
                 .projectName(updateProjectDto.getProjectName())

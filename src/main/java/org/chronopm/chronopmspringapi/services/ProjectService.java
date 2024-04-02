@@ -1,6 +1,6 @@
 package org.chronopm.chronopmspringapi.services;
 
-import org.chronopm.chronopmspringapi.dtos.projectDto.ProjectDto;
+import org.chronopm.chronopmspringapi.dtos.ProjectDto;
 import org.chronopm.chronopmspringapi.mappers.ProjectMapper;
 import org.chronopm.chronopmspringapi.repositories.IProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;

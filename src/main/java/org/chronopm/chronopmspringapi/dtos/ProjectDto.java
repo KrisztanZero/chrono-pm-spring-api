@@ -1,4 +1,4 @@
-package org.chronopm.chronopmspringapi.dtos.projectDto;
+package org.chronopm.chronopmspringapi.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
