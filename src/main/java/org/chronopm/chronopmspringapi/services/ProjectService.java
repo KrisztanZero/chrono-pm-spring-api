@@ -2,6 +2,8 @@ package org.chronopm.chronopmspringapi.services;
 
 import org.chronopm.chronopmspringapi.dtos.ProjectDto;
 import org.chronopm.chronopmspringapi.mappers.ProjectMapper;
+import org.chronopm.chronopmspringapi.models.DeleteResponse;
+import org.chronopm.chronopmspringapi.models.Project;
 import org.chronopm.chronopmspringapi.repositories.IProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,7 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class ProjectService implements IProjectService {
+public class ProjectService implements EntityService<ProjectDto> {
 
     private final IProjectRepository projectRepository;
 
@@ -20,25 +22,25 @@ public class ProjectService implements IProjectService {
     }
 
     @Override
-    public List<ProjectDto> getProjectList() {
+    public List<ProjectDto> getAll() {
         return projectRepository.findAll().stream()
                 .map(ProjectMapper::mapToDto)
                 .collect(Collectors.toList());
     }
 
-    public ProjectDto getProjectById(String id) {
+    public ProjectDto getById(String id) {
         var project = projectRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Project not found"));
 
         return ProjectMapper.mapToDto(project);
     }
 
-    public ProjectDto createProject(ProjectDto dto) {
+    public ProjectDto create(ProjectDto dto) {
         var project = projectRepository.save(ProjectMapper.mapToModel(dto));
         return ProjectMapper.mapToDto(project);
     }
 
-    public ProjectDto updateProject(ProjectDto dto, String id) {
+    public ProjectDto update(ProjectDto dto, String id) {
         var existingProject = projectRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Project not found"));
 
@@ -50,12 +52,17 @@ public class ProjectService implements IProjectService {
         return ProjectMapper.mapToDto(updatedProject);
     }
 
-    public ProjectDto deleteProject(String id) {
+    public DeleteResponse<ProjectDto> delete(String id) {
         var project = projectRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Project not found"));
 
         projectRepository.deleteById(id);
 
-        return ProjectMapper.mapToDto(project);
+        var projectDto = ProjectMapper.mapToDto(project);
+
+        return DeleteResponse.<ProjectDto>builder()
+                .entity(projectDto)
+                .message("Deleted successful")
+                .build();
     }
 }
