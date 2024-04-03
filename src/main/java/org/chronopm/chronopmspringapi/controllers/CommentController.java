@@ -33,11 +33,6 @@ public class CommentController {
         return commentService.create(commentDto);
     }
 
-    @PutMapping("/{id}")
-    public CommentDto update(@RequestBody CommentDto commentDto, @PathVariable("id") String id) {
-        return commentService.update(commentDto, id);
-    }
-
     @DeleteMapping("/{id}")
     public DeleteResponse<CommentDto> delete(@PathVariable("id") String id) {
         return commentService.delete(id);

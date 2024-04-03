@@ -41,9 +41,8 @@ public class UserService implements EntityService<UserDto> {
 
     @Override
     public UserDto update(UserDto dto, String id) {
-        var user = getUserById(id);
         var updateUser = UserMapper.mapForUpdate(dto);
-        updateUser.setId(user.getId());
+        updateUser.setId(id);
         userRepository.save(updateUser);
         return UserMapper.mapToDto(updateUser);
     }
