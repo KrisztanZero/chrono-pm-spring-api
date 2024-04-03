@@ -5,3 +5,6 @@ spring:
     mongodb:
       uri: "mongodb://localhost:27017"
       database: "Chrono-PM"
+
+server:
+  port: 5221
