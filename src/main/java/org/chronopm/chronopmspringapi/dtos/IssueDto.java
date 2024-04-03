@@ -1,4 +1,4 @@
-package org.chronopm.chronopmspringapi.dtos.projectDto;
+package org.chronopm.chronopmspringapi.dtos;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,14 +12,15 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CreateProjectDto {
-    private String projectName;
+public class IssueDto {
+    private String id;
+    private String title;
     private String summary;
     private String description;
     private String authorId;
     private List<String> assigneeId;
-    private List<String> issueId;
-    private List<String> noteId;
+    private List<String> commitId;
+    private String projectId;
     private LocalDateTime dueDate;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
