@@ -29,8 +29,7 @@ public class ProjectService implements EntityService<ProjectDto> {
     }
 
     public ProjectDto getById(String id) {
-        var project = projectRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Project not found"));
+        var project = getProjectById(id);
 
         return ProjectMapper.mapToDto(project);
     }
@@ -41,8 +40,7 @@ public class ProjectService implements EntityService<ProjectDto> {
     }
 
     public ProjectDto update(ProjectDto dto, String id) {
-        var existingProject = projectRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Project not found"));
+        var existingProject = getProjectById(id);
 
         var updatedProject = ProjectMapper.mapForUpdate(dto);
         updatedProject.setId(existingProject.getId());
@@ -53,8 +51,7 @@ public class ProjectService implements EntityService<ProjectDto> {
     }
 
     public DeleteResponse<ProjectDto> delete(String id) {
-        var project = projectRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("Project not found"));
+        var project = getProjectById(id);
 
         projectRepository.deleteById(id);
 
@@ -64,5 +61,10 @@ public class ProjectService implements EntityService<ProjectDto> {
                 .entity(projectDto)
                 .message("Deleted successful")
                 .build();
+    }
+
+    private Project getProjectById(String id) {
+        return projectRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Project not found"));
     }
 }
