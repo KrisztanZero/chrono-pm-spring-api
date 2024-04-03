@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class CommitDto {
+public class CommentDto {
     private String id;
     private String summary;
     private String description;

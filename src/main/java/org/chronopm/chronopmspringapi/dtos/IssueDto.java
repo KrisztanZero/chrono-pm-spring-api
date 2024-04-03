@@ -19,7 +19,7 @@ public class IssueDto {
     private String description;
     private String authorId;
     private List<String> assigneeId;
-    private List<String> commitId;
+    private List<String> commentId;
     private String projectId;
     private LocalDateTime dueDate;
     private LocalDateTime createdAt;

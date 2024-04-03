@@ -20,7 +20,7 @@ public class UserMapper {
                 .projectId(user.getProjectId())
                 .noteId(user.getNoteId())
                 .issueId(user.getIssueId())
-                .commitId(user.getCommitId())
+                .commentId(user.getCommentId())
                 .build();
     }
 
@@ -38,7 +38,7 @@ public class UserMapper {
                 .projectId(dto.getProjectId())
                 .noteId(dto.getNoteId())
                 .issueId(dto.getIssueId())
-                .commitId(dto.getCommitId())
+                .commentId(dto.getCommentId())
                 .build();
     }
 
@@ -54,7 +54,7 @@ public class UserMapper {
                 .projectId(updateDto.getProjectId())
                 .noteId(updateDto.getNoteId())
                 .issueId(updateDto.getIssueId())
-                .commitId(updateDto.getCommitId())
+                .commentId(updateDto.getCommentId())
                 .build();
     }
 }

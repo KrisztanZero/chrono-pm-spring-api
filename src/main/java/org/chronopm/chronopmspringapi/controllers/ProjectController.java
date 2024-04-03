@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/projects")
+@RequestMapping("/api/project")
 public class ProjectController {
 
     private final EntityService<ProjectDto> projectService;
@@ -28,17 +28,17 @@ public class ProjectController {
         return projectService.getById(id);
     }
 
-    @PostMapping("/create")
+    @PostMapping()
     public ProjectDto createProject(@RequestBody ProjectDto projectDto){
         return projectService.create(projectDto);
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ProjectDto updateProject(@RequestBody ProjectDto projectDto, @PathVariable("id") String id){
         return projectService.update(projectDto, id);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public DeleteResponse<ProjectDto> deleteProject(@PathVariable("id") String id){
         return projectService.delete(id);
     }

@@ -9,12 +9,12 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-@Document("commits")
+@Document("comments")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Commit {
+public class Comment {
     @Id
     private String id;
     private String summary;

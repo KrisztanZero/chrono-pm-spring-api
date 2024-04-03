@@ -28,7 +28,7 @@ public class User {
     private String phoneNumber;
     private List<String> projectId;
     private List<String> issueId;
-    private List<String> commitId;
+    private List<String> commentId;
     private List<String> noteId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

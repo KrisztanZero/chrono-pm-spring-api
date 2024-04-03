@@ -11,7 +11,7 @@ public class IssueMapper {
                 .id(issue.getId())
                 .authorId(issue.getAuthorId())
                 .projectId(issue.getProjectId())
-                .commitId(issue.getCommitId())
+                .commentId(issue.getCommentId())
                 .assigneeId(issue.getAssigneeId())
                 .title(issue.getTitle())
                 .summary(issue.getSummary())
@@ -28,7 +28,7 @@ public class IssueMapper {
         return Issue.builder()
                 .authorId(dto.getAuthorId())
                 .projectId(dto.getProjectId())
-                .commitId(dto.getCommitId())
+                .commentId(dto.getCommentId())
                 .assigneeId(dto.getAssigneeId())
                 .title(dto.getTitle())
                 .summary(dto.getSummary())
@@ -43,7 +43,7 @@ public class IssueMapper {
 
     public static Issue mapForUpdate(IssueDto updateDto) {
         return Issue.builder()
-                .commitId(updateDto.getCommitId())
+                .commentId(updateDto.getCommentId())
                 .assigneeId(updateDto.getAssigneeId())
                 .title(updateDto.getTitle())
                 .summary(updateDto.getSummary())
