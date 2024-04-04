@@ -1,9 +1,7 @@
 package org.chronopm.chronopmspringapi.controllers;
 
 import org.chronopm.chronopmspringapi.dtos.CommentDto;
-import org.chronopm.chronopmspringapi.models.DeleteResponse;
-import org.chronopm.chronopmspringapi.services.EntityService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.chronopm.chronopmspringapi.services.IEntityService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,10 +9,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/comment")
 public class CommentController {
-    private final EntityService<CommentDto> commentService;
+    private final IEntityService<CommentDto> commentService;
 
-    @Autowired
-    public CommentController(EntityService<CommentDto> commentService) {
+    public CommentController(IEntityService<CommentDto> commentService) {
         this.commentService = commentService;
     }
 
@@ -33,8 +30,13 @@ public class CommentController {
         return commentService.create(commentDto);
     }
 
+    @PutMapping("{id}")
+    public CommentDto update(@RequestBody CommentDto updateComment, @PathVariable("id") String id) {
+        return commentService.update(updateComment, id);
+    }
+
     @DeleteMapping("/{id}")
-    public DeleteResponse<CommentDto> delete(@PathVariable("id") String id) {
+    public String delete(@PathVariable("id") String id) {
         return commentService.delete(id);
     }
 }

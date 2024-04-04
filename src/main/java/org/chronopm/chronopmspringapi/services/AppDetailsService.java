@@ -3,16 +3,14 @@ package org.chronopm.chronopmspringapi.services;
 import org.chronopm.chronopmspringapi.dtos.AppDetailsDto;
 import org.chronopm.chronopmspringapi.mappers.AppDetailsMapper;
 import org.chronopm.chronopmspringapi.models.AppDetails;
-import org.chronopm.chronopmspringapi.models.DeleteResponse;
 import org.chronopm.chronopmspringapi.repositories.IAppDetailsRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class AppDetailsService implements EntityService<AppDetailsDto> {
+public class AppDetailsService implements IEntityService<AppDetailsDto> {
 
     private final IAppDetailsRepository appDetailsRepository;
 
@@ -22,7 +20,9 @@ public class AppDetailsService implements EntityService<AppDetailsDto> {
 
     @Override
     public List<AppDetailsDto> getAll() {
-        return appDetailsRepository.findAll().stream().map(AppDetailsMapper::mapToDto).collect(Collectors.toList());
+        return appDetailsRepository.findAll().stream()
+                .map(AppDetailsMapper::mapToDto)
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -40,22 +40,19 @@ public class AppDetailsService implements EntityService<AppDetailsDto> {
     public AppDetailsDto update(AppDetailsDto appDetailsDto, String id) {
         var updatedAppDetails = AppDetailsMapper.mapForUpdate(appDetailsDto);
         updatedAppDetails.setId(id);
-        appDetailsRepository.save(updatedAppDetails);
-        return AppDetailsMapper.mapToDto(updatedAppDetails);
+        var appDetails = appDetailsRepository.save(updatedAppDetails);
+        return AppDetailsMapper.mapToDto(appDetails);
     }
 
     @Override
-    public DeleteResponse<AppDetailsDto> delete(String id) {
-        var dto = AppDetailsMapper.mapToDto(getAppDetailsById(id));
+    public String delete(String id) {
         appDetailsRepository.deleteById(id);
 
-        return DeleteResponse.<AppDetailsDto>builder()
-                .message("Delete Successful")
-                .entity(dto)
-                .build();
+        return id;
     }
 
     private AppDetails getAppDetailsById(String id) {
-        return appDetailsRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("App details not found"));
+        return appDetailsRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("App details not found"));
     }
 }

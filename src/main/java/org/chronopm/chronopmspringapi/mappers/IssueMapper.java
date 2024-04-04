@@ -37,7 +37,7 @@ public class IssueMapper {
                 .originalEstimate(dto.getOriginalEstimate())
                 .remainingEstimate(dto.getRemainingEstimate())
                 .createdAt(LocalDateTime.now())
-                .updatedAt(dto.getUpdatedAt())
+                .updatedAt(LocalDateTime.now())
                 .build();
     }
 
@@ -49,7 +49,6 @@ public class IssueMapper {
                 .summary(updateDto.getSummary())
                 .description(updateDto.getDescription())
                 .dueDate(updateDto.getDueDate())
-                .originalEstimate(updateDto.getOriginalEstimate())
                 .remainingEstimate(updateDto.getRemainingEstimate())
                 .updatedAt(LocalDateTime.now())
                 .build();

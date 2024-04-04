@@ -1,9 +1,7 @@
 package org.chronopm.chronopmspringapi.controllers;
 
 import org.chronopm.chronopmspringapi.dtos.IssueDto;
-import org.chronopm.chronopmspringapi.models.DeleteResponse;
-import org.chronopm.chronopmspringapi.services.EntityService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.chronopm.chronopmspringapi.services.IEntityService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,10 +9,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/issue")
 public class IssueController {
-    private final EntityService<IssueDto> issueService;
+    private final IEntityService<IssueDto> issueService;
 
-    @Autowired
-    public IssueController(EntityService<IssueDto> issueService) {
+    public IssueController(IEntityService<IssueDto> issueService) {
         this.issueService = issueService;
     }
 
@@ -39,7 +36,7 @@ public class IssueController {
     }
 
     @DeleteMapping("/{id}")
-    public DeleteResponse<IssueDto> delete(@PathVariable("id") String id) {
+    public String delete(@PathVariable("id") String id) {
         return issueService.delete(id);
     }
 }

@@ -3,6 +3,8 @@ package org.chronopm.chronopmspringapi.mappers;
 import org.chronopm.chronopmspringapi.dtos.CommentDto;
 import org.chronopm.chronopmspringapi.models.Comment;
 
+import java.time.LocalDateTime;
+
 public class CommentMapper {
     public static CommentDto mapToDto(Comment comment) {
         return CommentDto.builder()
@@ -21,7 +23,18 @@ public class CommentMapper {
                 .issueId(dto.getIssueId())
                 .summary(dto.getSummary())
                 .description(dto.getDescription())
-                .createdAt(dto.getCreatedAt())
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
+                .build();
+    }
+
+    public static Comment mapForUpdate(CommentDto updateDto) {
+        return Comment.builder()
+                .authorId(updateDto.getAuthorId())
+                .issueId(updateDto.getIssueId())
+                .summary(updateDto.getSummary())
+                .description(updateDto.getDescription())
+                .updatedAt(LocalDateTime.now())
                 .build();
     }
 }

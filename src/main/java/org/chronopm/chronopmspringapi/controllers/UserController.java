@@ -1,9 +1,7 @@
 package org.chronopm.chronopmspringapi.controllers;
 
 import org.chronopm.chronopmspringapi.dtos.UserDto;
-import org.chronopm.chronopmspringapi.models.DeleteResponse;
-import org.chronopm.chronopmspringapi.services.EntityService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.chronopm.chronopmspringapi.services.IEntityService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,10 +9,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
-    private final EntityService<UserDto> userService;
+    private final IEntityService<UserDto> userService;
 
-    @Autowired
-    public UserController(EntityService<UserDto> userService) {
+    public UserController(IEntityService<UserDto> userService) {
         this.userService = userService;
     }
 
@@ -39,7 +36,7 @@ public class UserController {
     }
 
     @DeleteMapping("/{id}")
-    public DeleteResponse<UserDto> delete(@PathVariable("id") String id) {
+    public String delete(@PathVariable("id") String id) {
         return userService.delete(id);
     }
 }

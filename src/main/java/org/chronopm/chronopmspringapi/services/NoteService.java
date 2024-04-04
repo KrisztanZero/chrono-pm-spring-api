@@ -2,19 +2,17 @@ package org.chronopm.chronopmspringapi.services;
 
 import org.chronopm.chronopmspringapi.dtos.NoteDto;
 import org.chronopm.chronopmspringapi.mappers.NoteMapper;
-import org.chronopm.chronopmspringapi.models.DeleteResponse;
 import org.chronopm.chronopmspringapi.models.Note;
 import org.chronopm.chronopmspringapi.repositories.INoteRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
+
 @Service
-public class NoteService implements EntityService<NoteDto> {
+public class NoteService implements IEntityService<NoteDto> {
     private final INoteRepository noteRepository;
 
-    @Autowired
     public NoteService(INoteRepository noteRepository) {
         this.noteRepository = noteRepository;
     }
@@ -42,23 +40,20 @@ public class NoteService implements EntityService<NoteDto> {
     public NoteDto update(NoteDto dto, String id) {
         var updateNote = NoteMapper.mapForUpdate(dto);
         updateNote.setId(id);
-        noteRepository.save(updateNote);
-        return NoteMapper.mapToDto(updateNote);
+        var note = noteRepository.save(updateNote);
+        return NoteMapper.mapToDto(note);
     }
 
     @Override
-    public DeleteResponse<NoteDto> delete(String id) {
-        var noteDto = NoteMapper.mapToDto(getNoteById(id));
+    public String delete(String id) {
         noteRepository.deleteById(id);
 
-        return DeleteResponse.<NoteDto>builder()
-                .entity(noteDto)
-                .message("Deleted Successful")
-                .build();
+        return id;
     }
 
     private Note getNoteById(String id) {
-        return noteRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Note not found"));
+        return noteRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Note not found"));
 
     }
 }

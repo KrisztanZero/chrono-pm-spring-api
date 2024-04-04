@@ -27,7 +27,7 @@ public class AppDetailsMapper {
                 .developers(dto.getDevelopers())
                 .copyRights(dto.getCopyRights())
                 .createdAt(LocalDateTime.now())
-                .updatedAt(dto.getUpdatedAt())
+                .updatedAt(LocalDateTime.now())
                 .build();
     }
 
@@ -38,7 +38,6 @@ public class AppDetailsMapper {
                 .version(updateDto.getVersion())
                 .developers(updateDto.getDevelopers())
                 .copyRights(updateDto.getCopyRights())
-                .createdAt(updateDto.getCreatedAt())
                 .updatedAt(LocalDateTime.now())
                 .build();
     }

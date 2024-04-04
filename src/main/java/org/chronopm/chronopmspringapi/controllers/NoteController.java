@@ -1,9 +1,7 @@
 package org.chronopm.chronopmspringapi.controllers;
 
 import org.chronopm.chronopmspringapi.dtos.NoteDto;
-import org.chronopm.chronopmspringapi.models.DeleteResponse;
-import org.chronopm.chronopmspringapi.services.EntityService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.chronopm.chronopmspringapi.services.IEntityService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,10 +9,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/note")
 public class NoteController {
-    private final EntityService<NoteDto> noteService;
+    private final IEntityService<NoteDto> noteService;
 
-    @Autowired
-    public NoteController(EntityService<NoteDto> noteService) {
+    public NoteController(IEntityService<NoteDto> noteService) {
         this.noteService = noteService;
     }
 
@@ -39,7 +36,7 @@ public class NoteController {
     }
 
     @DeleteMapping("/{id}")
-    public DeleteResponse<NoteDto> delete(@PathVariable("id") String id) {
+    public String delete(@PathVariable("id") String id) {
         return noteService.delete(id);
     }
 }

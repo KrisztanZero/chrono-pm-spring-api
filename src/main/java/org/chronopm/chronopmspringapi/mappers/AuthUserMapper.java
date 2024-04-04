@@ -19,17 +19,18 @@ public class AuthUserMapper {
 
     public static AuthUser mapToModel(AuthUserDto dto) {
         return AuthUser.builder()
-                .createdAt(LocalDateTime.now())
                 .username(dto.getUsername())
                 .password(dto.getPassword())
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
                 .build();
     }
 
     public static AuthUser mapForUpdate(AuthUserDto updateDto) {
         return AuthUser.builder()
-                .updatedAt(LocalDateTime.now())
                 .username(updateDto.getUsername())
                 .password(updateDto.getPassword())
+                .updatedAt(LocalDateTime.now())
                 .build();
     }
 }

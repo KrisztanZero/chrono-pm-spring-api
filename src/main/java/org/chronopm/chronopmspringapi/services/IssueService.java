@@ -2,7 +2,6 @@ package org.chronopm.chronopmspringapi.services;
 
 import org.chronopm.chronopmspringapi.dtos.IssueDto;
 import org.chronopm.chronopmspringapi.mappers.IssueMapper;
-import org.chronopm.chronopmspringapi.models.DeleteResponse;
 import org.chronopm.chronopmspringapi.models.Issue;
 import org.chronopm.chronopmspringapi.repositories.IIssueRepository;
 import org.springframework.stereotype.Service;
@@ -11,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class IssueService implements EntityService<IssueDto> {
+public class IssueService implements IEntityService<IssueDto> {
 
     private final IIssueRepository issueRepository;
 
@@ -42,21 +41,18 @@ public class IssueService implements EntityService<IssueDto> {
     public IssueDto update(IssueDto issueDto, String id) {
         var updatedIssue = IssueMapper.mapForUpdate(issueDto);
         updatedIssue.setId(id);
-        issueRepository.save(updatedIssue);
-        return IssueMapper.mapToDto(updatedIssue);
+        var issue = issueRepository.save(updatedIssue);
+        return IssueMapper.mapToDto(issue);
     }
 
     @Override
-    public DeleteResponse<IssueDto> delete(String id) {
-        var issueDto = IssueMapper.mapToDto(getIssueById(id));
+    public String delete(String id) {
         issueRepository.deleteById(id);
-        return DeleteResponse.<IssueDto>builder()
-                .entity(issueDto)
-                .message("Delete Successful")
-                .build();
+        return id;
     }
 
     private Issue getIssueById(String id) {
-        return issueRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Issue not found"));
+        return issueRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Issue not found"));
     }
 }

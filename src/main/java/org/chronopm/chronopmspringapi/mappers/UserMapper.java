@@ -6,7 +6,7 @@ import org.chronopm.chronopmspringapi.models.User;
 import java.time.LocalDateTime;
 
 public class UserMapper {
-    public static UserDto mapToDto(User user){
+    public static UserDto mapToDto(User user) {
         return UserDto.builder()
                 .id(user.getId())
                 .email(user.getEmail())
@@ -24,7 +24,7 @@ public class UserMapper {
                 .build();
     }
 
-    public static User mapToModel(UserDto dto){
+    public static User mapToModel(UserDto dto) {
         return User.builder()
                 .id(dto.getId())
                 .email(dto.getEmail())
@@ -33,8 +33,8 @@ public class UserMapper {
                 .surname(dto.getSurname())
                 .introduction(dto.getIntroduction())
                 .phoneNumber(dto.getPhoneNumber())
-                .createdAt(dto.getCreatedAt())
-                .updatedAt(dto.getUpdatedAt())
+                .createdAt(LocalDateTime.now())
+                .updatedAt(LocalDateTime.now())
                 .projectId(dto.getProjectId())
                 .noteId(dto.getNoteId())
                 .issueId(dto.getIssueId())
@@ -42,7 +42,7 @@ public class UserMapper {
                 .build();
     }
 
-    public static User mapForUpdate(UserDto updateDto){
+    public static User mapForUpdate(UserDto updateDto) {
         return User.builder()
                 .email(updateDto.getEmail())
                 .username(updateDto.getUsername())

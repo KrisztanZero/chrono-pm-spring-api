@@ -6,7 +6,7 @@ import org.chronopm.chronopmspringapi.models.Project;
 import java.time.LocalDateTime;
 
 public class ProjectMapper {
-    public static ProjectDto mapToDto(Project project){
+    public static ProjectDto mapToDto(Project project) {
         return ProjectDto.builder()
                 .id(project.getId())
                 .projectName(project.getProjectName())
@@ -24,7 +24,7 @@ public class ProjectMapper {
                 .build();
     }
 
-    public static Project mapToModel (ProjectDto dto){
+    public static Project mapToModel(ProjectDto dto) {
         return Project.builder()
                 .projectName(dto.getProjectName())
                 .summary(dto.getSummary())
@@ -35,15 +35,14 @@ public class ProjectMapper {
                 .noteId(dto.getNoteId())
                 .dueDate(dto.getDueDate())
                 .createdAt(LocalDateTime.now())
-                .updatedAt(dto.getUpdatedAt())
+                .updatedAt(LocalDateTime.now())
                 .originalEstimate(dto.getOriginalEstimate())
                 .remainingEstimate(dto.getRemainingEstimate())
                 .build();
     }
 
-    public static Project mapForUpdate(ProjectDto updateProjectDto){
+    public static Project mapForUpdate(ProjectDto updateProjectDto) {
         return Project.builder()
-                .updatedAt(LocalDateTime.now())
                 .projectName(updateProjectDto.getProjectName())
                 .summary(updateProjectDto.getSummary())
                 .description(updateProjectDto.getDescription())
@@ -52,7 +51,6 @@ public class ProjectMapper {
                 .noteId(updateProjectDto.getNoteId())
                 .dueDate(updateProjectDto.getDueDate())
                 .updatedAt(LocalDateTime.now())
-                .originalEstimate(updateProjectDto.getOriginalEstimate())
                 .remainingEstimate(updateProjectDto.getRemainingEstimate())
                 .build();
     }
