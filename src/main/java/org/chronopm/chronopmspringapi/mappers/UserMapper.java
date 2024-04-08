@@ -17,10 +17,10 @@ public class UserMapper {
                 .phoneNumber(user.getPhoneNumber())
                 .createdAt(user.getCreatedAt())
                 .updatedAt(user.getUpdatedAt())
-                .projectId(user.getProjectId())
-                .noteId(user.getNoteId())
-                .issueId(user.getIssueId())
-                .commentId(user.getCommentId())
+                .projectIds(user.getProjectIds())
+                .noteIds(user.getNoteIds())
+                .issueIds(user.getIssueIds())
+                .commentIds(user.getCommentIds())
                 .build();
     }
 
@@ -35,10 +35,10 @@ public class UserMapper {
                 .phoneNumber(dto.getPhoneNumber())
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
-                .projectId(dto.getProjectId())
-                .noteId(dto.getNoteId())
-                .issueId(dto.getIssueId())
-                .commentId(dto.getCommentId())
+                .projectIds(dto.getProjectIds())
+                .noteIds(dto.getNoteIds())
+                .issueIds(dto.getIssueIds())
+                .commentIds(dto.getCommentIds())
                 .build();
     }
 
@@ -51,10 +51,10 @@ public class UserMapper {
                 .introduction(updateDto.getIntroduction())
                 .phoneNumber(updateDto.getPhoneNumber())
                 .updatedAt(LocalDateTime.now())
-                .projectId(updateDto.getProjectId())
-                .noteId(updateDto.getNoteId())
-                .issueId(updateDto.getIssueId())
-                .commentId(updateDto.getCommentId())
+                .projectIds(updateDto.getProjectIds())
+                .noteIds(updateDto.getNoteIds())
+                .issueIds(updateDto.getIssueIds())
+                .commentIds(updateDto.getCommentIds())
                 .build();
     }
 }

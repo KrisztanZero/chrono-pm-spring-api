@@ -18,9 +18,9 @@ public class Project {
     private String summary;
     private String description;
     private String authorId;
-    private List<String> assigneeId;
-    private List<String> issueId;
-    private List<String> noteId;
+    private List<String> assigneeIds;
+    private List<String> issueIds;
+    private List<String> noteIds;
     private LocalDateTime dueDate;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

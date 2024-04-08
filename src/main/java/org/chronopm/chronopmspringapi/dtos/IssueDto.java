@@ -14,8 +14,8 @@ public class IssueDto {
     private String summary;
     private String description;
     private String authorId;
-    private List<String> assigneeId;
-    private List<String> commentId;
+    private List<String> assigneeIds;
+    private List<String> commentIds;
     private String projectId;
     private LocalDateTime dueDate;
     private LocalDateTime createdAt;

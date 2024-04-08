@@ -22,10 +22,10 @@ public class User {
     private String surname;
     private String introduction;
     private String phoneNumber;
-    private List<String> projectId;
-    private List<String> issueId;
-    private List<String> commentId;
-    private List<String> noteId;
+    private List<String> projectIds;
+    private List<String> issueIds;
+    private List<String> commentIds;
+    private List<String> noteIds;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }
