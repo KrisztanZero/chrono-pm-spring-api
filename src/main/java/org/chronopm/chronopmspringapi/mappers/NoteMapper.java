@@ -9,7 +9,7 @@ public class NoteMapper {
     public static NoteDto mapToDto(Note note) {
         return NoteDto.builder()
                 .id(note.getId())
-                .ProjectId(note.getProjectId())
+                .projectId(note.getProjectId())
                 .authorId(note.getAuthorId())
                 .summary(note.getSummary())
                 .description(note.getDescription())
@@ -20,7 +20,7 @@ public class NoteMapper {
 
     public static Note mapToModel(NoteDto noteDto) {
         return Note.builder()
-                .ProjectId(noteDto.getProjectId())
+                .projectId(noteDto.getProjectId())
                 .authorId(noteDto.getAuthorId())
                 .summary(noteDto.getSummary())
                 .description(noteDto.getDescription())
@@ -29,10 +29,14 @@ public class NoteMapper {
                 .build();
     }
 
-    public static Note mapForUpdate(NoteDto updateDto) {
+    public static Note mapForUpdate(NoteDto updateDto, Note note) {
         return Note.builder()
-                .summary(updateDto.getSummary())
-                .description(updateDto.getDescription())
+                .id(note.getId())
+                .projectId(updateDto.getProjectId() != null ? updateDto.getProjectId() : note.getProjectId())
+                .authorId(updateDto.getAuthorId() != null ? updateDto.getAuthorId() : note.getAuthorId())
+                .summary(updateDto.getSummary() != null ? updateDto.getSummary() : note.getSummary())
+                .description(updateDto.getDescription() != null ? updateDto.getDescription() : note.getDescription())
+                .createdAt(note.getCreatedAt())
                 .updatedAt(LocalDateTime.now())
                 .build();
     }

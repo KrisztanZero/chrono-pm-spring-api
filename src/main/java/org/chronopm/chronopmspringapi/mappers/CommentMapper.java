@@ -28,12 +28,14 @@ public class CommentMapper {
                 .build();
     }
 
-    public static Comment mapForUpdate(CommentDto updateDto) {
+    public static Comment mapForUpdate(CommentDto updateDto, Comment comment) {
         return Comment.builder()
-                .authorId(updateDto.getAuthorId())
-                .issueId(updateDto.getIssueId())
-                .summary(updateDto.getSummary())
-                .description(updateDto.getDescription())
+                .id(comment.getId())
+                .authorId(updateDto.getAuthorId() != null ? updateDto.getAuthorId() : comment.getAuthorId())
+                .issueId(updateDto.getIssueId() != null ? updateDto.getIssueId() : comment.getIssueId())
+                .summary(updateDto.getSummary() != null ? updateDto.getSummary() : comment.getSummary())
+                .description(updateDto.getDescription() != null ? updateDto.getDescription() : comment.getDescription())
+                .createdAt(comment.getCreatedAt())
                 .updatedAt(LocalDateTime.now())
                 .build();
     }

@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Builder
 public class AuthUser {
     @Id
-    private String Id;
+    private String id;
     private String userId;
     private String username;
     private String password;

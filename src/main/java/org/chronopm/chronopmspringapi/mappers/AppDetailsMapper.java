@@ -31,13 +31,15 @@ public class AppDetailsMapper {
                 .build();
     }
 
-    public static AppDetails mapForUpdate(AppDetailsDto updateDto) {
+    public static AppDetails mapForUpdate(AppDetailsDto updateDto, AppDetails model) {
         return AppDetails.builder()
-                .welcomeMessage(updateDto.getWelcomeMessage())
-                .introduction(updateDto.getIntroduction())
-                .version(updateDto.getVersion())
-                .developers(updateDto.getDevelopers())
-                .copyRights(updateDto.getCopyRights())
+                .id(model.getId())
+                .welcomeMessage(updateDto.getWelcomeMessage() != null ? updateDto.getWelcomeMessage() : model.getWelcomeMessage())
+                .introduction(updateDto.getIntroduction() != null ? updateDto.getIntroduction() : model.getIntroduction())
+                .version(updateDto.getVersion() != null ? updateDto.getVersion() : model.getVersion())
+                .developers(updateDto.getDevelopers() != null ? updateDto.getDevelopers() : model.getDevelopers())
+                .copyRights(updateDto.getCopyRights() != null ? updateDto.getCopyRights() : model.getCopyRights())
+                .createdAt(model.getCreatedAt())
                 .updatedAt(LocalDateTime.now())
                 .build();
     }

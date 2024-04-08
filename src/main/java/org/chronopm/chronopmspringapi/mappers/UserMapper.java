@@ -42,19 +42,21 @@ public class UserMapper {
                 .build();
     }
 
-    public static User mapForUpdate(UserDto updateDto) {
+    public static User mapForUpdate(UserDto updateDto, User user) {
         return User.builder()
-                .email(updateDto.getEmail())
-                .username(updateDto.getUsername())
-                .familyName(updateDto.getFamilyName())
-                .surname(updateDto.getSurname())
-                .introduction(updateDto.getIntroduction())
-                .phoneNumber(updateDto.getPhoneNumber())
+                .id(user.getId())
+                .email(updateDto.getEmail() != null ? updateDto.getEmail() : user.getEmail())
+                .username(updateDto.getUsername() != null ? updateDto.getUsername() : user.getUsername())
+                .familyName(updateDto.getFamilyName() != null ? updateDto.getFamilyName() : user.getFamilyName())
+                .surname(updateDto.getSurname() != null ? updateDto.getSurname() : user.getSurname())
+                .introduction(updateDto.getIntroduction() != null ? updateDto.getIntroduction() : user.getIntroduction())
+                .phoneNumber(updateDto.getPhoneNumber() != null ? updateDto.getPhoneNumber() : user.getPhoneNumber())
+                .createdAt(user.getCreatedAt())
                 .updatedAt(LocalDateTime.now())
-                .projectIds(updateDto.getProjectIds())
-                .noteIds(updateDto.getNoteIds())
-                .issueIds(updateDto.getIssueIds())
-                .commentIds(updateDto.getCommentIds())
+                .projectIds(updateDto.getProjectIds() != null ? updateDto.getProjectIds() : user.getProjectIds())
+                .noteIds(updateDto.getNoteIds() != null ? updateDto.getNoteIds() : user.getNoteIds())
+                .issueIds(updateDto.getIssueIds() != null ? updateDto.getIssueIds() : user.getIssueIds())
+                .commentIds(updateDto.getCommentIds() != null ? updateDto.getCommentIds() : user.getCommentIds())
                 .build();
     }
 }

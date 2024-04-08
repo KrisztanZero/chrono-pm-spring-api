@@ -41,16 +41,18 @@ public class IssueMapper {
                 .build();
     }
 
-    public static Issue mapForUpdate(IssueDto updateDto) {
-        return Issue.builder()
-                .commentIds(updateDto.getCommentIds())
-                .assigneeIds(updateDto.getAssigneeIds())
-                .title(updateDto.getTitle())
-                .summary(updateDto.getSummary())
-                .description(updateDto.getDescription())
-                .dueDate(updateDto.getDueDate())
-                .remainingEstimate(updateDto.getRemainingEstimate())
-                .updatedAt(LocalDateTime.now())
-                .build();
+    public static Issue mapForUpdate(IssueDto updateDto, Issue issue) {
+        issue.setAuthorId(updateDto.getAuthorId() != null ? updateDto.getAuthorId() : issue.getAuthorId());
+        issue.setProjectId(updateDto.getProjectId() != null ? updateDto.getProjectId() : issue.getProjectId());
+        issue.setCommentIds(updateDto.getCommentIds() != null ? updateDto.getCommentIds() : issue.getCommentIds());
+        issue.setAssigneeIds(updateDto.getAssigneeIds() != null ? updateDto.getAssigneeIds() : issue.getAssigneeIds());
+        issue.setTitle(updateDto.getTitle() != null ? updateDto.getTitle() : issue.getTitle());
+        issue.setSummary(updateDto.getSummary() != null ? updateDto.getSummary() : issue.getSummary());
+        issue.setDescription(updateDto.getDescription() != null ? updateDto.getDescription() : issue.getDescription());
+        issue.setDueDate(updateDto.getDueDate() != null ? updateDto.getDueDate() : issue.getDueDate());
+        issue.setOriginalEstimate(updateDto.getOriginalEstimate() != 0 ? updateDto.getOriginalEstimate() : issue.getOriginalEstimate());
+        issue.setRemainingEstimate(updateDto.getRemainingEstimate() != 0 ? updateDto.getRemainingEstimate() : issue.getRemainingEstimate());
+        issue.setUpdatedAt(LocalDateTime.now());
+        return issue;
     }
 }

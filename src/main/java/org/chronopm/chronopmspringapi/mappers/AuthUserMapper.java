@@ -26,10 +26,13 @@ public class AuthUserMapper {
                 .build();
     }
 
-    public static AuthUser mapForUpdate(AuthUserDto updateDto) {
+    public static AuthUser mapForUpdate(AuthUserDto updateDto, AuthUser authUser) {
         return AuthUser.builder()
-                .username(updateDto.getUsername())
-                .password(updateDto.getPassword())
+                .id(authUser.getId())
+                .userId(authUser.getUserId())
+                .username(updateDto.getUsername() != null ? updateDto.getUsername() : authUser.getUsername())
+                .password(updateDto.getPassword() != null ? updateDto.getPassword() : authUser.getPassword())
+                .createdAt(authUser.getCreatedAt())
                 .updatedAt(LocalDateTime.now())
                 .build();
     }

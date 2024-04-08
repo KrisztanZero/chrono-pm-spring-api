@@ -16,7 +16,7 @@ public class Note {
     private String summary;
     private String description;
     private String authorId;
-    private String ProjectId;
+    private String projectId;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }
