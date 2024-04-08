@@ -38,7 +38,8 @@ public class AppDetailsService implements IEntityService<AppDetailsDto> {
 
     @Override
     public AppDetailsDto update(AppDetailsDto appDetailsDto, String id) {
-        var updatedAppDetails = AppDetailsMapper.mapForUpdate(appDetailsDto);
+        var existingAppDetails = getAppDetailsById(id);
+        var updatedAppDetails = AppDetailsMapper.mapForUpdate(appDetailsDto, existingAppDetails);
         updatedAppDetails.setId(id);
         var appDetails = appDetailsRepository.save(updatedAppDetails);
         return AppDetailsMapper.mapToDto(appDetails);

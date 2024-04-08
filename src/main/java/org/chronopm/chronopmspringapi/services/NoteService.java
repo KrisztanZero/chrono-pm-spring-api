@@ -38,7 +38,8 @@ public class NoteService implements IEntityService<NoteDto> {
 
     @Override
     public NoteDto update(NoteDto dto, String id) {
-        var updateNote = NoteMapper.mapForUpdate(dto);
+        var existingNote = getNoteById(id);
+        var updateNote = NoteMapper.mapForUpdate(dto, existingNote);
         updateNote.setId(id);
         var note = noteRepository.save(updateNote);
         return NoteMapper.mapToDto(note);

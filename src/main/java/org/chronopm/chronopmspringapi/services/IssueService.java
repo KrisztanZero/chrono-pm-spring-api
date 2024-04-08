@@ -39,7 +39,8 @@ public class IssueService implements IEntityService<IssueDto> {
 
     @Override
     public IssueDto update(IssueDto issueDto, String id) {
-        var updatedIssue = IssueMapper.mapForUpdate(issueDto);
+        var existingIssue = getIssueById(id);
+        var updatedIssue = IssueMapper.mapForUpdate(issueDto, existingIssue);
         updatedIssue.setId(id);
         var issue = issueRepository.save(updatedIssue);
         return IssueMapper.mapToDto(issue);

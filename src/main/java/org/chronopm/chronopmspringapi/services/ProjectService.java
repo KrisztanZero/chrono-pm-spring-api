@@ -37,7 +37,8 @@ public class ProjectService implements IEntityService<ProjectDto> {
     }
 
     public ProjectDto update(ProjectDto dto, String id) {
-        var updatedProject = ProjectMapper.mapForUpdate(dto);
+        var existingProject = getProjectById(id);
+        var updatedProject = ProjectMapper.mapForUpdate(dto, existingProject);
         updatedProject.setId(id);
         var project = projectRepository.save(updatedProject);
         return ProjectMapper.mapToDto(project);

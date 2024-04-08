@@ -39,7 +39,8 @@ public class CommentService implements IEntityService<CommentDto> {
 
     @Override
     public CommentDto update(CommentDto commentDto, String id) {
-        var updatedComment = CommentMapper.mapForUpdate(commentDto);
+        var existingComment = getCommentById(id);
+        var updatedComment = CommentMapper.mapForUpdate(commentDto, existingComment);
         updatedComment.setId(id);
         var comment = commentRepository.save(updatedComment);
         return CommentMapper.mapToDto(comment);
