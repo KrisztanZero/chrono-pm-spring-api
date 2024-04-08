@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Document("appDetails")
@@ -17,7 +18,8 @@ public class AppDetails {
     private String welcomeMessage;
     private String introduction;
     private String version;
-    private List<String> developers;
+    @Builder.Default
+    private List<String> developers = new ArrayList<>();
     private String copyRights;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

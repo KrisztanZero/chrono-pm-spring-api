@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Document("issues")
@@ -18,8 +19,10 @@ public class Issue {
     private String summary;
     private String description;
     private String authorId;
-    private List<String> assigneeIds;
-    private List<String> commentIds;
+    @Builder.Default
+    private List<String> assigneeIds = new ArrayList<>();
+    @Builder.Default
+    private List<String> commentIds = new ArrayList<>();
     private String projectId;
     private LocalDateTime dueDate;
     private LocalDateTime createdAt;

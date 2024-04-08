@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Document("users")
@@ -22,10 +23,14 @@ public class User {
     private String surname;
     private String introduction;
     private String phoneNumber;
-    private List<String> projectIds;
-    private List<String> issueIds;
-    private List<String> commentIds;
-    private List<String> noteIds;
+    @Builder.Default
+    private List<String> projectIds = new ArrayList<>();
+    @Builder.Default
+    private List<String> issueIds = new ArrayList<>();
+    @Builder.Default
+    private List<String> commentIds = new ArrayList<>();
+    @Builder.Default
+    private List<String> noteIds = new ArrayList<>();
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }
