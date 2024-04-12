@@ -13,9 +13,11 @@ import java.util.stream.Collectors;
 public class ProjectService implements IEntityService<ProjectDto> {
 
     private final IProjectRepository projectRepository;
+    private final IEntityManager entityManager;
 
-    public ProjectService(IProjectRepository projectRepository) {
+    public ProjectService(IProjectRepository projectRepository, IEntityManager entityManager) {
         this.projectRepository = projectRepository;
+        this.entityManager = entityManager;
     }
 
     @Override
@@ -33,6 +35,7 @@ public class ProjectService implements IEntityService<ProjectDto> {
 
     public ProjectDto create(ProjectDto dto) {
         var project = projectRepository.save(ProjectMapper.mapToModel(dto));
+        entityManager.handleProjectCreation(project);
         return ProjectMapper.mapToDto(project);
     }
 
@@ -45,6 +48,8 @@ public class ProjectService implements IEntityService<ProjectDto> {
     }
 
     public String delete(String id) {
+        var project = getProjectById(id);
+        entityManager.handleProjectDeletion(project);
         projectRepository.deleteById(id);
         return id;
     }
